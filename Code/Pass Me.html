@@ -1,0 +1,1806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pass Me — Find a Tutor at CAU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --purple:       oklch(0.48 0.26 278);
+      --purple-mid:   oklch(0.60 0.22 278);
+      --purple-light: oklch(0.90 0.08 278);
+      --purple-pale:  oklch(0.97 0.02 278);
+      --coral:        oklch(0.56 0.20 35);
+      --mint:         oklch(0.48 0.16 168);
+      --text:         oklch(0.16 0.04 278);
+      --text2:        oklch(0.42 0.05 278);
+      --text3:        oklch(0.62 0.04 278);
+      --border:       oklch(0.91 0.03 278);
+      --bg:           oklch(0.985 0.01 278);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    #root { min-height: 100vh; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--purple-light); border-radius: 99px; }
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--purple) !important;
+      box-shadow: 0 0 0 3px oklch(0.48 0.26 278 / 0.12);
+    }
+    main > div {
+      animation: fadeIn 0.22s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Navbar */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid oklch(0.92 0.03 278);
+    }
+    .nav-content {
+      display: flex;
+      align-items: center;
+      height: 66px;
+      gap: 8px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: inherit;
+      margin-right: 12px;
+      flex-shrink: 0;
+      white-space: nowrap;
+      padding: 0;
+    }
+    .nav-logo-box {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, oklch(0.42 0.28 278), oklch(0.58 0.24 308));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 900;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+    .nav-logo span {
+      font-weight: 900;
+      font-size: 20px;
+      color: oklch(0.16 0.08 278);
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2px;
+      flex: 1;
+    }
+    .nav-link {
+      padding: 8px 15px;
+      border-radius: 11px;
+      border: none;
+      background: transparent;
+      color: oklch(0.42 0.05 278);
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      transition: all 0.15s;
+    }
+    .nav-link.active {
+      background: oklch(0.95 0.05 278);
+      color: oklch(0.42 0.26 278);
+      font-weight: 700;
+    }
+    .nav-link:hover:not(.active) {
+      background: oklch(0.97 0.02 278);
+    }
+    .nav-right {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .nav-admin, .nav-find {
+      border-radius: 10px;
+      border: 1.5px solid oklch(0.88 0.04 278);
+      background: white;
+      color: oklch(0.55 0.06 278);
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 13px;
+      transition: border-color 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      padding: 7px 14px;
+    }
+    .nav-admin {
+      border: 1.5px solid oklch(0.88 0.04 278);
+    }
+    .nav-admin:hover {
+      border-color: oklch(0.72 0.10 278);
+    }
+    .nav-find {
+      padding: 9px 22px;
+      border-radius: 12px;
+      border: none;
+      background: var(--purple);
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      transition: filter 0.15s;
+    }
+    .nav-find:hover {
+      filter: brightness(1.12);
+    }
+
+    /* Footer */
+    footer {
+      background: oklch(0.11 0.04 278);
+      color: oklch(0.68 0.05 278);
+      padding: 52px 0 32px;
+    }
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 36px;
+      margin-bottom: 44px;
+    }
+    .footer-col {
+      max-width: 280px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .footer-logo-box {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, oklch(0.42 0.28 278), oklch(0.58 0.24 308));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 900;
+      font-size: 15px;
+    }
+    .footer-logo span {
+      font-weight: 900;
+      font-size: 18px;
+      color: white;
+      letter-spacing: -0.01em;
+    }
+    .footer-col > p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: oklch(0.62 0.05 278);
+    }
+    .footer-links {
+      display: flex;
+      gap: 52px;
+      flex-wrap: wrap;
+    }
+    .footer-section-title {
+      font-weight: 700;
+      color: white;
+      font-size: 13px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .footer-link {
+      margin-bottom: 12px;
+    }
+    .footer-link button {
+      background: none;
+      border: none;
+      color: oklch(0.62 0.05 278);
+      cursor: pointer;
+      font-size: 14px;
+      padding: 0;
+      font-family: inherit;
+      transition: color 0.15s;
+    }
+    .footer-link button:hover {
+      color: white;
+    }
+    .footer-bottom {
+      border-top: 1px solid oklch(0.20 0.04 278);
+      padding-top: 24px;
+      font-size: 13px;
+      text-align: center;
+      color: oklch(0.50 0.04 278);
+    }
+
+    /* Pages */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* Button styles */
+    .btn-primary {
+      padding: 15px 36px;
+      border-radius: 16px;
+      border: none;
+      background: white;
+      color: var(--purple);
+      font-weight: 800;
+      font-size: 16px;
+      cursor: pointer;
+      font-family: inherit;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.24);
+    }
+    .btn-secondary {
+      padding: 15px 36px;
+      border-radius: 16px;
+      border: 2px solid rgba(255,255,255,0.45);
+      background: transparent;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.85);
+    }
+    .btn-purple {
+      padding: 16px 40px;
+      border-radius: 16px;
+      border: none;
+      background: var(--purple);
+      color: white;
+      font-weight: 800;
+      font-size: 16px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: filter 0.15s;
+    }
+    .btn-purple:hover {
+      filter: brightness(1.15);
+    }
+
+    /* Tutor Card */
+    .tutor-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid oklch(0.93 0.03 278);
+      box-shadow: 0 2px 12px rgba(80,40,200,0.05);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .tutor-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 28px rgba(80,40,200,0.15);
+    }
+    .tutor-card-header {
+      height: 12px;
+    }
+    .tutor-card-body {
+      padding: 24px;
+    }
+    .tutor-card-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--purple);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+    .tutor-card-name {
+      font-weight: 800;
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+    .tutor-card-meta {
+      font-size: 13px;
+      color: oklch(0.50 0.05 278);
+      margin-bottom: 12px;
+    }
+    .tutor-card-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .tutor-card-subjects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .tutor-card-subject {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      background: oklch(0.95 0.04 278);
+      color: oklch(0.48 0.26 278);
+    }
+    .tutor-card-pricing {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .tutor-card-price {
+      padding: 6px 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      background: oklch(0.97 0.02 278);
+    }
+    .tutor-card-availability {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+    }
+    .tutor-card-day {
+      padding: 4px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      background: oklch(0.97 0.02 278);
+      color: oklch(0.50 0.05 278);
+    }
+    .tutor-card-day.available {
+      background: oklch(0.93 0.07 168);
+      color: oklch(0.40 0.16 168);
+    }
+
+    /* Form styles */
+    .form-card {
+      background: white;
+      border-radius: 22px;
+      padding: 28px;
+      margin-bottom: 20px;
+      border: 1px solid oklch(0.93 0.03 278);
+      box-shadow: 0 2px 12px rgba(80,40,200,0.05);
+    }
+    .form-card-title {
+      font-weight: 800;
+      font-size: 17px;
+      margin-bottom: 20px;
+      color: var(--purple);
+      padding-bottom: 12px;
+      border-bottom: 1.5px solid oklch(0.93 0.04 278);
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      grid-column: span 1;
+    }
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+    label {
+      font-weight: 600;
+      font-size: 13px;
+      color: oklch(0.40 0.06 278);
+      margin-bottom: 6px;
+      display: block;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 13px;
+      border: 1.5px solid oklch(0.90 0.04 278);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      background: white;
+      color: oklch(0.20 0.03 278);
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .form-hint {
+      font-size: 12px;
+      color: oklch(0.50 0.05 278);
+      margin-top: 4px;
+    }
+
+    /* Admin panel */
+    .admin-header {
+      background: oklch(0.11 0.04 278);
+      color: white;
+      padding: 40px 0;
+      margin-bottom: 32px;
+    }
+    .admin-header h1 {
+      font-weight: 900;
+      font-size: 36px;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .admin-header p {
+      color: oklch(0.68 0.05 278);
+      font-size: 16px;
+    }
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .admin-stat {
+      background: white;
+      padding: 16px 20px;
+      border-radius: 14px;
+      border: 1px solid oklch(0.93 0.03 278);
+      text-align: center;
+    }
+    .admin-stat-value {
+      font-weight: 900;
+      font-size: 28px;
+      color: var(--purple);
+      margin-bottom: 4px;
+    }
+    .admin-stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: oklch(0.50 0.05 278);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .admin-tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid oklch(0.93 0.03 278);
+    }
+    .admin-tab {
+      padding: 12px 16px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: oklch(0.50 0.05 278);
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .admin-tab.active {
+      color: var(--purple);
+      border-bottom-color: var(--purple);
+    }
+    .admin-applications {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
+    }
+    .admin-card {
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      border: 1px solid oklch(0.93 0.03 278);
+      box-shadow: 0 2px 10px rgba(80,40,200,0.05);
+    }
+    .admin-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .admin-card-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--purple);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .admin-card-info {
+      flex: 1;
+    }
+    .admin-card-name {
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .admin-card-meta {
+      font-size: 12px;
+      color: oklch(0.50 0.05 278);
+    }
+    .admin-card-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      background: oklch(0.95 0.04 278);
+      color: var(--purple);
+    }
+    .admin-card-bio {
+      font-size: 13px;
+      color: oklch(0.44 0.05 278);
+      margin: 12px 0;
+      line-height: 1.6;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s;
+    }
+    .admin-card.expanded .admin-card-bio {
+      max-height: 200px;
+    }
+    .admin-card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .admin-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: none;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .admin-btn-approve {
+      background: oklch(0.93 0.07 168);
+      color: oklch(0.40 0.16 168);
+    }
+    .admin-btn-approve:hover {
+      background: oklch(0.88 0.10 168);
+    }
+    .admin-btn-reject {
+      background: oklch(0.95 0.08 35);
+      color: oklch(0.52 0.20 35);
+    }
+    .admin-btn-reject:hover {
+      background: oklch(0.92 0.10 35);
+    }
+    .admin-status-approved {
+      background: oklch(0.93 0.07 168);
+      color: oklch(0.40 0.16 168);
+    }
+    .admin-status-rejected {
+      background: oklch(0.95 0.08 35);
+      color: oklch(0.52 0.20 35);
+    }
+
+    /* Hero sections */
+    .hero {
+      background: linear-gradient(140deg, oklch(0.42 0.28 278) 0%, oklch(0.52 0.26 300) 45%, oklch(0.60 0.22 330) 100%);
+      padding: 88px 0 104px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero.alt {
+      background: linear-gradient(140deg, oklch(0.56 0.20 35) 0%, oklch(0.64 0.22 55) 100%);
+      padding: 80px 0 92px;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.14);
+      border-radius: 100px;
+      padding: 7px 18px;
+      margin-bottom: 30px;
+      color: rgba(255,255,255,0.92);
+      font-size: 13px;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      white-space: nowrap;
+    }
+    .hero-title {
+      color: white;
+      font-size: clamp(38px, 5.5vw, 66px);
+      font-weight: 900;
+      line-height: 1.12;
+      margin-bottom: 22px;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.18);
+    }
+    .hero-accent {
+      color: oklch(0.92 0.14 82);
+    }
+    .hero-desc {
+      color: rgba(255,255,255,0.80);
+      font-size: 18px;
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: clamp(20px, 4vw, 52px);
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-value {
+      color: oklch(0.92 0.14 82);
+      font-weight: 900;
+      font-size: clamp(22px, 3vw, 30px);
+      letter-spacing: -0.01em;
+    }
+    .hero-stat-label {
+      color: rgba(255,255,255,0.65);
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    /* How it works section */
+    .how-section {
+      padding: 80px 0;
+      background: white;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--purple);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .how-card {
+      padding: 32px;
+      border-radius: 24px;
+    }
+    .how-number {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+      color: white;
+      margin-bottom: 22px;
+    }
+    .how-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .how-card p {
+      color: oklch(0.44 0.05 278);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    /* Featured tutors section */
+    .featured-section {
+      padding: 72px 0;
+      background: oklch(0.985 0.01 278);
+    }
+    .featured-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .featured-header h2 {
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+    .btn-browse {
+      padding: 11px 24px;
+      border-radius: 12px;
+      border: 2px solid var(--purple);
+      background: transparent;
+      color: var(--purple);
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn-browse:hover {
+      background: oklch(0.95 0.05 278);
+    }
+    .tutors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 22px;
+    }
+
+    /* CTA banner */
+    .cta-section {
+      padding: 80px 0;
+      background: oklch(0.13 0.06 278);
+      text-align: center;
+    }
+    .cta-title {
+      color: white;
+      font-size: clamp(26px, 4vw, 46px);
+      font-weight: 900;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .cta-desc {
+      color: oklch(0.68 0.05 278);
+      font-size: 17px;
+      max-width: 480px;
+      margin: 0 auto 36px;
+      line-height: 1.75;
+    }
+
+    /* Find tutors page */
+    .find-header {
+      background: linear-gradient(135deg, oklch(0.42 0.28 278), oklch(0.54 0.24 308));
+      padding: 52px 0 72px;
+    }
+    .find-header h1 {
+      color: white;
+      font-weight: 900;
+      font-size: clamp(28px, 4vw, 42px);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .find-header p {
+      color: rgba(255,255,255,0.72);
+      font-size: 16px;
+    }
+    .filter-card {
+      background: white;
+      border-radius: 22px;
+      padding: 22px 24px;
+      box-shadow: 0 8px 36px rgba(80,40,200,0.13);
+      margin-bottom: 32px;
+      border: 1px solid oklch(0.93 0.03 278);
+      margin-top: -32px;
+      position: relative;
+      z-index: 10;
+    }
+    .filter-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .filter-input {
+      flex: 2 1 200px;
+    }
+    .filter-select {
+      flex: 1 1 180px;
+    }
+    .filter-reset {
+      padding: 12px 18px;
+      border-radius: 13px;
+      border: 1.5px solid oklch(0.90 0.04 278);
+      background: white;
+      color: oklch(0.50 0.05 278);
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-reset:hover {
+      border-color: var(--purple);
+      color: var(--purple);
+    }
+    .result-count {
+      color: oklch(0.50 0.05 278);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 0;
+    }
+
+    /* Tutor profile */
+    .profile-header {
+      color: white;
+      padding: 40px 0;
+      margin-bottom: 32px;
+      border-radius: 0;
+    }
+    .profile-header h1 {
+      font-weight: 900;
+      font-size: 36px;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .profile-content {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 28px;
+    }
+    @media (max-width: 768px) {
+      .profile-content {
+        grid-template-columns: 1fr;
+      }
+    }
+    .profile-main {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .profile-section {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      border: 1px solid oklch(0.93 0.03 278);
+    }
+    .profile-section h2 {
+      font-weight: 800;
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: var(--purple);
+    }
+    .profile-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .profile-pricing {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      border: 1px solid oklch(0.93 0.03 278);
+    }
+    .pricing-item {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid oklch(0.93 0.03 278);
+    }
+    .pricing-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .pricing-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: oklch(0.50 0.05 278);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .pricing-value {
+      font-weight: 900;
+      font-size: 24px;
+      color: var(--purple);
+    }
+    .contact-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .contact-btn {
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: none;
+      background: var(--purple);
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: inherit;
+      text-decoration: none;
+      text-align: center;
+      transition: filter 0.15s;
+    }
+    .contact-btn:hover {
+      filter: brightness(1.1);
+    }
+
+    /* Become a tutor */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+    }
+    .benefit-card {
+      padding: 28px;
+      border-radius: 22px;
+      border: 1px solid;
+    }
+    .benefit-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+    .benefit-card h3 {
+      font-weight: 800;
+      font-size: 17px;
+      margin-bottom: 9px;
+    }
+    .benefit-card p {
+      color: oklch(0.44 0.05 278);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    /* Process steps */
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .process-step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      background: white;
+      border-radius: 20px;
+      padding: 22px 26px;
+      border: 1px solid oklch(0.91 0.04 278);
+      box-shadow: 0 2px 10px rgba(80,40,200,0.05);
+    }
+    .process-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      flex-shrink: 0;
+      background: var(--purple);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 17px;
+    }
+    .process-step h3 {
+      font-weight: 800;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    .process-step p {
+      color: oklch(0.50 0.05 278);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* Success screen */
+    .success-screen {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 24px;
+    }
+    .success-box {
+      text-align: center;
+      max-width: 440px;
+    }
+    .success-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: oklch(0.93 0.07 168);
+      margin: 0 auto 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: oklch(0.40 0.16 168);
+    }
+    .success-box h2 {
+      font-weight: 900;
+      font-size: 30px;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+    .success-box p {
+      color: oklch(0.50 0.05 278);
+      font-size: 16px;
+      line-height: 1.75;
+      margin-bottom: 30px;
+    }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      z-index: 1000;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(400px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .toast.success {
+      background: oklch(0.40 0.16 168);
+    }
+    .toast.error {
+      background: oklch(0.52 0.20 35);
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <nav>
+      <div class="container nav-content">
+        <button class="nav-logo" onclick="app.navigate('home')">
+          <div class="nav-logo-box">P</div>
+          <span>Pass Me</span>
+        </button>
+        <div class="nav-links">
+          <button class="nav-link" id="nav-find-tutors" onclick="app.navigate('find-tutors')">Find Tutors</button>
+          <button class="nav-link" id="nav-become-tutor" onclick="app.navigate('become-tutor')">Become a Tutor</button>
+        </div>
+        <div class="nav-right">
+          <button class="nav-admin" onclick="app.navigate('admin')">Admin ⚙</button>
+          <button class="nav-find" onclick="app.navigate('find-tutors')">Find a Tutor</button>
+        </div>
+      </div>
+    </nav>
+
+    <main id="main">
+      <!-- HOMEPAGE -->
+      <div id="page-home" class="page active">
+        <section class="hero">
+          <div style="position:absolute; top:-80px; right:-80px; width:480px; height:480px; border-radius:50%; background:rgba(255,255,255,0.05); pointer-events:none;"></div>
+          <div style="position:absolute; bottom:-100px; left:20%; width:360px; height:360px; border-radius:50%; background:rgba(255,255,255,0.04); pointer-events:none;"></div>
+          <div style="position:absolute; top:30%; right:15%; width:200px; height:200px; border-radius:50%; background:rgba(255,255,255,0.04); pointer-events:none;"></div>
+          <div class="container hero-content">
+            <div class="hero-badge">🎓 CAU · Peer Tutoring Platform</div>
+            <h1 class="hero-title">Find your perfect tutor<br><span class="hero-accent">at CAU</span></h1>
+            <p class="hero-desc">Connect with verified peer tutors from your own university. Learn from students who aced the same courses — affordably, flexibly, and on your schedule.</p>
+            <div class="hero-buttons">
+              <button class="btn-primary" onclick="app.navigate('find-tutors')">Find a Tutor →</button>
+              <button class="btn-secondary" onclick="app.navigate('become-tutor')">Become a Tutor</button>
+            </div>
+            <div class="hero-stats">
+              <div class="hero-stat"><div class="hero-stat-value">47+</div><div class="hero-stat-label">Active Tutors</div></div>
+              <div class="hero-stat"><div class="hero-stat-value">300+</div><div class="hero-stat-label">Students Helped</div></div>
+              <div class="hero-stat"><div class="hero-stat-value">50+</div><div class="hero-stat-label">Subjects</div></div>
+              <div class="hero-stat"><div class="hero-stat-value">1,200+</div><div class="hero-stat-label">Sessions Done</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="how-section">
+          <div class="container">
+            <div class="section-header">
+              <div class="section-label">How it works</div>
+              <h2 class="section-title">Find help in 3 simple steps</h2>
+            </div>
+            <div class="how-grid">
+              <div class="how-card" style="background: oklch(0.95 0.05 278); border: 1px solid oklch(0.48 0.26 278)20;">
+                <div class="how-number" style="background: oklch(0.48 0.26 278);">01</div>
+                <h3>Choose your subject</h3>
+                <p>Browse by faculty and subject. Filter by availability, price range, and more to find exactly the right fit.</p>
+              </div>
+              <div class="how-card" style="background: oklch(0.95 0.04 35); border: 1px solid oklch(0.56 0.20 35)20;">
+                <div class="how-number" style="background: oklch(0.56 0.20 35);">02</div>
+                <h3>View tutor profiles</h3>
+                <p>Read bios, check experience, compare prices, and see verified session counts from real students.</p>
+              </div>
+              <div class="how-card" style="background: oklch(0.93 0.05 168); border: 1px solid oklch(0.48 0.16 168)20;">
+                <div class="how-number" style="background: oklch(0.48 0.16 168);">03</div>
+                <h3>Connect directly</h3>
+                <p>Reach out via Telegram, phone or email. No booking system, no platform fees — just direct, genuine learning.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="featured-section">
+          <div class="container">
+            <div class="featured-header">
+              <div>
+                <div class="section-label">Featured</div>
+                <h2>Top-rated tutors this week</h2>
+              </div>
+              <button class="btn-browse" onclick="app.navigate('find-tutors')">Browse all tutors →</button>
+            </div>
+            <div class="tutors-grid" id="featured-tutors"></div>
+          </div>
+        </section>
+
+        <section class="cta-section">
+          <div class="container">
+            <div style="font-size:12px; font-weight:700; color:oklch(0.62 0.14 278); text-transform:uppercase; letter-spacing:0.14em; margin-bottom:16px;">For Tutors</div>
+            <h2 class="cta-title">Share your knowledge,<br>earn while you study</h2>
+            <p class="cta-desc">Join 47+ CAU students already tutoring on Pass Me. Set your own schedule, prices, and subjects. No platform cut — ever.</p>
+            <button class="btn-purple" onclick="app.navigate('become-tutor')">Apply to Become a Tutor →</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- FIND TUTORS -->
+      <div id="page-find-tutors" class="page">
+        <section class="find-header">
+          <div class="container">
+            <h1>Find a Tutor</h1>
+            <p>Browse verified peer tutors at Central Asian University</p>
+          </div>
+        </section>
+        <div class="container">
+          <div class="filter-card">
+            <div class="filter-controls">
+              <input id="search-input" class="filter-input" type="text" placeholder="🔍  Search by name or subject…" onkeyup="app.filterTutors()">
+              <select id="faculty-select" class="filter-select" onchange="app.filterTutors()">
+                <option>All Schools</option>
+                <option>Business School</option>
+                <option>School of Engineering</option>
+                <option>Medical School</option>
+                <option>Dental School</option>
+                <option>Architecture & Design School</option>
+                <option>Hospitality Management & Tourism School</option>
+              </select>
+              <button class="filter-reset" onclick="app.resetFilters()">Reset</button>
+            </div>
+          </div>
+          <div class="result-count" id="result-count"></div>
+          <div class="tutors-grid" id="tutors-grid"></div>
+        </div>
+      </div>
+
+      <!-- TUTOR PROFILE -->
+      <div id="page-tutor-profile" class="page">
+        <div id="profile-content"></div>
+      </div>
+
+      <!-- BECOME A TUTOR -->
+      <div id="page-become-tutor" class="page">
+        <section class="hero alt">
+          <div style="position:absolute; top:-60px; right:-60px; width:380px; height:380px; border-radius:50%; background:rgba(255,255,255,0.06); pointer-events:none;"></div>
+          <div style="position:absolute; bottom:-80px; left:15%; width:300px; height:300px; border-radius:50%; background:rgba(255,255,255,0.04); pointer-events:none;"></div>
+          <div class="container hero-content">
+            <div class="hero-badge">✨ 47 tutors earning on Pass Me</div>
+            <h1 class="hero-title">Earn while you help<br>others succeed</h1>
+            <p class="hero-desc">Join Pass Me as a tutor. Set your own prices, schedule, and subjects. Help your peers — and build real teaching experience along the way.</p>
+            <button class="btn-primary" onclick="app.navigate('register')">Apply Now — It's Free →</button>
+          </div>
+        </section>
+
+        <section class="how-section">
+          <div class="container">
+            <h2 style="text-align:center; font-weight:900; font-size:clamp(24px, 3.5vw, 38px); margin-bottom:50px; letter-spacing:-0.02em;">Why tutor on Pass Me?</h2>
+            <div class="benefits-grid">
+              <div class="benefit-card" style="background: oklch(0.95 0.04 35); border-color: oklch(0.56 0.20 35)20;">
+                <div class="benefit-icon" style="background: oklch(0.56 0.20 35);">💰</div>
+                <h3>Set your own prices</h3>
+                <p>You decide what you charge — no platform cut, ever. Keep 100% of what students pay you.</p>
+              </div>
+              <div class="benefit-card" style="background: oklch(0.95 0.05 278); border-color: oklch(0.48 0.26 278)20;">
+                <div class="benefit-icon" style="background: oklch(0.48 0.26 278);">📅</div>
+                <h3>Flexible schedule</h3>
+                <p>Mark your available days. Teach around your own classes — morning, evening, weekend, your call.</p>
+              </div>
+              <div class="benefit-card" style="background: oklch(0.93 0.05 168); border-color: oklch(0.48 0.16 168)20;">
+                <div class="benefit-icon" style="background: oklch(0.48 0.16 168);">🎓</div>
+                <h3>Build experience</h3>
+                <p>Strengthen your own understanding and add real teaching experience to your CV or portfolio.</p>
+              </div>
+              <div class="benefit-card" style="background: oklch(0.94 0.05 250); border-color: oklch(0.44 0.20 250)20;">
+                <div class="benefit-icon" style="background: oklch(0.44 0.20 250);">🤝</div>
+                <h3>Direct connection</h3>
+                <p>Students contact you directly via Telegram, phone, or email. No middleman, no complexity.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="featured-section">
+          <div class="container">
+            <h2 style="text-align:center; font-weight:900; font-size:clamp(24px, 3.5vw, 38px); margin-bottom:48px; letter-spacing:-0.02em;">How the application works</h2>
+            <div class="process-steps">
+              <div class="process-step">
+                <div class="process-number">1</div>
+                <div>
+                  <h3>Submit your application</h3>
+                  <p>Fill out a short form with your details, subjects, prices, and contact info. Takes about 5 minutes.</p>
+                </div>
+              </div>
+              <div class="process-step">
+                <div class="process-number">2</div>
+                <div>
+                  <h3>Admin review</h3>
+                  <p>Our team reviews your profile within 24–48 hours to verify you're a current CAU student.</p>
+                </div>
+              </div>
+              <div class="process-step">
+                <div class="process-number">3</div>
+                <div>
+                  <h3>Go live!</h3>
+                  <p>Once approved, your profile appears on Pass Me and students can reach out to you directly.</p>
+                </div>
+              </div>
+            </div>
+            <div style="text-align:center; margin-top:40px;">
+              <button class="btn-purple" onclick="app.navigate('register')">Start Your Application →</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- TUTOR REGISTRATION -->
+      <div id="page-register" class="page">
+        <section style="background:linear-gradient(135deg, oklch(0.42 0.28 278), oklch(0.54 0.24 308)); padding:50px 0 72px;">
+          <div class="container">
+            <button style="display:inline-flex; align-items:center; gap:7px; color:rgba(255,255,255,0.80); background:rgba(255,255,255,0.14); border:none; padding:9px 18px; border-radius:11px; cursor:pointer; font-family:inherit; font-size:13px; font-weight:600; margin-bottom:26px; white-space:nowrap;" onclick="app.navigate('become-tutor')">← Back</button>
+            <h1 style="color:white; font-weight:900; font-size:38px; letter-spacing:-0.02em;">Tutor Application</h1>
+            <p style="color:rgba(255,255,255,0.72); margin-top:8px; font-size:15px;">Central Asian University · Pass Me</p>
+          </div>
+        </section>
+        <div class="container" style="max-width:720px; margin-top:-24px; padding-bottom:80px;">
+          <form id="registration-form" onsubmit="app.submitRegistration(event)">
+            <div class="form-card">
+              <div class="form-card-title">Personal Information</div>
+              <div class="form-grid">
+                <div class="form-group full">
+                  <label>Full Name *</label>
+                  <input type="text" name="fullName" placeholder="e.g. Dilnoza Yusupova" required>
+                </div>
+                <div class="form-group full">
+                  <label>University</label>
+                  <input type="text" value="Central Asian University" readonly style="background:oklch(0.97 0.02 278); color:oklch(0.50 0.06 278); cursor:not-allowed;">
+                </div>
+                <div class="form-group">
+                  <label>School *</label>
+                  <select name="school" required onchange="app.updatePrograms()">
+                    <option value="">Select school</option>
+                    <option>Business School</option>
+                    <option>School of Engineering</option>
+                    <option>Medical School</option>
+                    <option>Dental School</option>
+                    <option>Architecture & Design School</option>
+                    <option>Hospitality Management & Tourism School</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Program *</label>
+                  <select name="program" id="program-select" required>
+                    <option value="">Select program</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Year of Study *</label>
+                  <select name="year" required>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-card">
+              <div class="form-card-title">Subjects & Pricing</div>
+              <div class="form-grid">
+                <div class="form-group full">
+                  <label>Subjects *</label>
+                  <input type="text" name="subjects" placeholder="e.g. Accounting, Economics, Statistics" required>
+                  <div class="form-hint">Comma-separated list of subjects you can teach</div>
+                </div>
+                <div class="form-group">
+                  <label>Individual Lesson Price (UZS/hr) *</label>
+                  <input type="number" name="individual" placeholder="e.g. 80000" required>
+                </div>
+                <div class="form-group">
+                  <label>Group Lesson Price (UZS/student) *</label>
+                  <input type="number" name="group" placeholder="e.g. 45000" required>
+                </div>
+              </div>
+              <div style="background:oklch(0.93 0.07 168); padding:12px 16px; border-radius:12px; margin-top:16px;">
+                <div style="font-size:12px; font-weight:600; color:oklch(0.40 0.16 168); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">Typical rates</div>
+                <div style="font-size:13px; color:oklch(0.40 0.16 168); line-height:1.6;">60,000–120,000 UZS/hr individual · 35,000–70,000 UZS/student group</div>
+              </div>
+            </div>
+
+            <div class="form-card">
+              <div class="form-card-title">Bio & Experience</div>
+              <div class="form-grid">
+                <div class="form-group full">
+                  <label>Bio *</label>
+                  <textarea name="bio" placeholder="Tell students about yourself, your teaching style, and why you're a great tutor..." required></textarea>
+                </div>
+                <div class="form-group full">
+                  <label>Experience *</label>
+                  <textarea name="experience" placeholder="How long have you been tutoring? What's your experience? Any achievements?" required></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-card">
+              <div class="form-card-title">Availability</div>
+              <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;">
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:500; font-size:14px;">
+                  <input type="checkbox" name="availability" value="Mon"> Mon
+                </label>
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:500; font-size:14px;">
+                  <input type="checkbox" name="availability" value="Tue"> Tue
+                </label>
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:500; font-size:14px;">
+                  <input type="checkbox" name="availability" value="Wed"> Wed
+                </label>
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:500; font-size:14px;">
+                  <input type="checkbox" name="availability" value="Thu"> Thu
+                </label>
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:500; font-size:14px;">
+                  <input type="checkbox" name="availability" value="Fri"> Fri
+                </label>
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:500; font-size:14px;">
+                  <input type="checkbox" name="availability" value="Sat"> Sat
+                </label>
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:500; font-size:14px;">
+                  <input type="checkbox" name="availability" value="Sun"> Sun
+                </label>
+              </div>
+            </div>
+
+            <div class="form-card">
+              <div class="form-card-title">Contact Information</div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Telegram Handle *</label>
+                  <input type="text" name="telegram" placeholder="e.g. @yourhandle" required>
+                </div>
+                <div class="form-group">
+                  <label>Phone Number *</label>
+                  <input type="tel" name="phone" placeholder="e.g. +998 90 123 4567" required>
+                </div>
+                <div class="form-group full">
+                  <label>Email *</label>
+                  <input type="email" name="email" placeholder="e.g. yourname@cau.uz" required>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-purple" style="width:100%; padding:16px;">Submit Application</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- REGISTRATION SUCCESS -->
+      <div id="page-register-success" class="page">
+        <div class="success-screen">
+          <div class="success-box">
+            <div class="success-circle">✓</div>
+            <h2>Application submitted!</h2>
+            <p>Thanks for applying to Pass Me! Our team will review your profile within 24–48 hours and get back to you via email.</p>
+            <button class="btn-purple" onclick="app.navigate('home')">Back to Home</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN PANEL -->
+      <div id="page-admin" class="page">
+        <div class="admin-header">
+          <div class="container">
+            <h1>Admin Dashboard</h1>
+            <p>Manage tutor applications and approvals</p>
+          </div>
+        </div>
+        <div class="container">
+          <div class="admin-stats" id="admin-stats"></div>
+          <div class="admin-tabs">
+            <button class="admin-tab active" data-status="all" onclick="app.filterApplications('all')">All Applications</button>
+            <button class="admin-tab" data-status="pending" onclick="app.filterApplications('pending')">Pending</button>
+            <button class="admin-tab" data-status="approved" onclick="app.filterApplications('approved')">Approved</button>
+            <button class="admin-tab" data-status="rejected" onclick="app.filterApplications('rejected')">Rejected</button>
+          </div>
+          <div class="admin-applications" id="admin-applications"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="footer-logo">
+              <div class="footer-logo-box">P</div>
+              <span>Pass Me</span>
+            </div>
+            <p>Peer tutoring marketplace for Central Asian University students. Find help, share knowledge, succeed together.</p>
+          </div>
+          <div class="footer-links">
+            <div>
+              <div class="footer-section-title">Students</div>
+              <div class="footer-link"><button onclick="app.navigate('find-tutors')">Find Tutors</button></div>
+              <div class="footer-link"><button onclick="app.navigate('home')">How it Works</button></div>
+            </div>
+            <div>
+              <div class="footer-section-title">Tutors</div>
+              <div class="footer-link"><button onclick="app.navigate('become-tutor')">Become a Tutor</button></div>
+              <div class="footer-link"><button onclick="app.navigate('register')">Apply Now</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          © 2026 Pass Me · Central Asian University · Built for students, by students
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Data
+    const PROGRAMS = {
+      "Business School": ["Accounting and Finance", "Management", "Economics", "International Business", "Marketing", "English Language Teaching"],
+      "School of Engineering": ["Computer Science", "Biomedical Engineering", "Industrial Engineering"],
+      "Medical School": ["Medicine"],
+      "Dental School": ["Dental Surgery"],
+      "Architecture & Design School": ["Architecture & Design"],
+      "Hospitality Management & Tourism School": ["Hospitality Management & Tourism"],
+    };
+
+    const FACULTY_COLORS = {
+      "Business School": { color: "oklch(0.54 0.20 35)", label: "Business" },
+      "School of Engineering": { color: "oklch(0.48 0.26 278)", label: "Engineering" },
+      "Medical School": { color: "oklch(0.42 0.20 250)", label: "Medical" },
+      "Dental School": { color: "oklch(0.42 0.18 200)", label: "Dental" },
+      "Architecture & Design School": { color: "oklch(0.46 0.16 168)", label: "Architecture" },
+      "Hospitality Management & Tourism School": { color: "oklch(0.50 0.18 12)", label: "Hospitality" },
+    };
+
+    const TUTORS = [
+      { id: 1, name: "Dilnoza Yusupova", school: "Business School", program: "Accounting and Finance", year: 3, subjects: ["Accounting", "Economics", "Statistics"], individual: 80000, group: 45000, bio: "3rd-year Accounting & Finance student with a strong academic record. I break down complex accounting principles and economic theory into clear, practical lessons. My approach is exam-focused and stress-free — helped 25+ students improve their GPA significantly.", experience: "1.5 years tutoring. Peer mentor at CAU's Academic Support Hub. Top student in Financial Accounting. Created revision sheets used by 60+ students across the Business School.", telegram: "@dilnoza_tutor", phone: "+998 90 123 4567", email: "d.yusupova@cau.uz", availability: ["Mon", "Wed", "Fri", "Sat"], sessions: 34, rating: 4.9 },
+      { id: 2, name: "Jasur Toshmatov", school: "School of Engineering", program: "Computer Science", year: 3, subjects: ["Programming Fundamentals", "Calculus", "Web Development Basics"], individual: 90000, group: 50000, bio: "CS student who loves making code click for beginners. From your very first 'Hello World' to building real web pages — I teach with patience and real project examples. Sessions are hands-on, not just theory. Active in hackathons and the CAU coding club.", experience: "2 years tutoring. Teaching Assistant for Programming Fundamentals lab. Mentored 15+ first-year students. Built 4 production web apps. Runner-up at CAU Hackathon 2025.", telegram: "@jasur_code", phone: "+998 91 234 5678", email: "j.toshmatov@cau.uz", availability: ["Tue", "Thu", "Sat", "Sun"], sessions: 52, rating: 4.9 },
+      { id: 3, name: "Malika Rahimova", school: "Medical School", program: "Medicine", year: 4, subjects: ["Anatomy", "Biology", "Medical Terminology"], individual: 100000, group: 60000, bio: "4th-year Medicine student with a passion for helping fellow students navigate the demanding med school curriculum. I use visual aids, mnemonics, and clinical context to make anatomy and biology genuinely memorable. No more rote-memorisation sessions.", experience: "2 years tutoring. Dean's List student. Anatomy study group leader for 30+ students. Created illustrated anatomy notes distributed across the Medical School.", telegram: "@malika_med", phone: "+998 93 345 6789", email: "m.rahimova@cau.uz", availability: ["Mon", "Wed", "Fri"], sessions: 41, rating: 4.8 },
+      { id: 4, name: "Bobur Nazarov", school: "Dental School", program: "Dental Surgery", year: 3, subjects: ["Dental Anatomy", "Chemistry", "Biology"], individual: 85000, group: 48000, bio: "Dental Surgery student with top marks in Dental Anatomy and Chemistry. I focus on making the science behind dentistry engaging and exam-ready. Small group sessions are my specialty — relaxed atmosphere, real results.", experience: "1 year tutoring. Lab demonstrator for Chemistry practicals. Helped peers ace their Dental Anatomy midterms. Active member of the CAU Dental Student Society.", telegram: "@bobur_dental", phone: "+998 94 456 7890", email: "b.nazarov@cau.uz", availability: ["Mon", "Tue", "Thu", "Sat"], sessions: 19, rating: 4.7 },
+      { id: 5, name: "Zulfiya Karimova", school: "Architecture & Design School", program: "Architecture & Design", year: 2, subjects: ["Architecture Studio Basics", "Design Software"], individual: 75000, group: 42000, bio: "2nd-year Architecture & Design student with a sharp eye for spatial thinking and digital tools. I guide students through studio projects, technical drawing, AutoCAD, and design software from the ground up with a calm, structured approach.", experience: "6 months tutoring. Workshop assistant for Architecture Studio. Proficient in AutoCAD, SketchUp, and Adobe Creative Suite. Won CAU Best Studio Project Award 2025.", telegram: "@zulfiya_arch", phone: "+998 95 567 8901", email: "z.karimova@cau.uz", availability: ["Wed", "Thu", "Fri", "Sun"], sessions: 14, rating: 4.6 },
+      { id: 6, name: "Sarvar Mirzaev", school: "Hospitality Management & Tourism School", program: "Hospitality Management & Tourism", year: 4, subjects: ["Hospitality Operations", "Tourism Management", "Management"], individual: 70000, group: 38000, bio: "Final-year Hospitality & Tourism student with real industry internship experience in Tashkent. I connect classroom theory directly to hotel and tourism operations — practical, engaging, and relevant to your future career.", experience: "1 year tutoring. Completed internship at a 5-star hotel in Tashkent. Organised CAU Tourism Week 2025. Mentored junior students on dissertation research and industry presentations.", telegram: "@sarvar_hosp", phone: "+998 97 678 9012", email: "s.mirzaev@cau.uz", availability: ["Tue", "Sat", "Sun"], sessions: 23, rating: 4.8 }
+    ];
+
+    // App state
+    const app = {
+      currentPage: 'home',
+      filteredTutors: [...TUTORS],
+      applications: TUTORS.map(t => ({ ...t, status: 'approved' })),
+      adminFilter: 'all',
+
+      navigate(page, params = {}) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(`page-${page}`)?.classList.add('active');
+        this.currentPage = page;
+        window.scrollTo(0, 0);
+        this.updateNav();
+
+        if (page === 'home') this.renderFeaturedTutors();
+        if (page === 'find-tutors') { this.filterTutors(); this.updateNav(); }
+        if (page === 'tutor-profile') this.renderProfile(params.id);
+        if (page === 'admin') this.renderAdmin();
+      },
+
+      updateNav() {
+        document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
+        if (this.currentPage === 'find-tutors') document.getElementById('nav-find-tutors')?.classList.add('active');
+        if (this.currentPage === 'become-tutor') document.getElementById('nav-become-tutor')?.classList.add('active');
+        document.getElementById('footer').style.display = this.currentPage === 'admin' ? 'none' : 'block';
+      },
+
+      renderTutorCard(tutor) {
+        const color = FACULTY_COLORS[tutor.school]?.color || 'oklch(0.48 0.26 278)';
+        const initials = tutor.name.split(' ').map(n => n[0]).join('');
+        return `
+          <div class="tutor-card" onclick="app.navigate('tutor-profile', {id: ${tutor.id}})">
+            <div class="tutor-card-header" style="background: ${color};"></div>
+            <div class="tutor-card-body">
+              <div class="tutor-card-avatar" style="background: ${color};">${initials}</div>
+              <div class="tutor-card-name">${tutor.name}</div>
+              <div class="tutor-card-meta">${tutor.school} · Year ${tutor.year}</div>
+              <div class="tutor-card-badge" style="background: ${color}20; color: ${color};">${FACULTY_COLORS[tutor.school]?.label || 'Faculty'}</div>
+              <div class="tutor-card-subjects">
+                ${tutor.subjects.slice(0, 2).map(s => `<div class="tutor-card-subject">${s}</div>`).join('')}
+              </div>
+              <div class="tutor-card-pricing">
+                <div class="tutor-card-price"><strong>${tutor.individual.toLocaleString()}</strong> UZS/hr</div>
+                <div class="tutor-card-price"><strong>${tutor.group.toLocaleString()}</strong> UZS/group</div>
+              </div>
+              <div class="tutor-card-availability">
+                ${['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => `
+                  <div class="tutor-card-day ${tutor.availability.includes(day) ? 'available' : ''}">${day.substring(0, 1)}</div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      },
+
+      renderFeaturedTutors() {
+        document.getElementById('featured-tutors').innerHTML = TUTORS.slice(0, 3).map(t => this.renderTutorCard(t)).join('');
+      },
+
+      filterTutors() {
+        const search = document.getElementById('search-input')?.value.toLowerCase() || '';
+        const faculty = document.getElementById('faculty-select')?.value || 'All Schools';
+
+        this.filteredTutors = TUTORS.filter(t => {
+          if (faculty !== 'All Schools' && t.school !== faculty) return false;
+          if (search && !t.name.toLowerCase().includes(search) && !t.subjects.some(s => s.toLowerCase().includes(search))) return false;
+          return true;
+        });
+
+        document.getElementById('tutors-grid').innerHTML = this.filteredTutors.map(t => this.renderTutorCard(t)).join('');
+        document.getElementById('result-count').textContent = `${this.filteredTutors.length} tutor${this.filteredTutors.length !== 1 ? 's' : ''} found`;
+      },
+
+      resetFilters() {
+        document.getElementById('search-input').value = '';
+        document.getElementById('faculty-select').value = 'All Schools';
+        this.filterTutors();
+      },
+
+      renderProfile(id) {
+        const tutor = TUTORS.find(t => t.id === id);
+        if (!tutor) return;
+
+        const color = FACULTY_COLORS[tutor.school]?.color || 'oklch(0.48 0.26 278)';
+        const initials = tutor.name.split(' ').map(n => n[0]).join('');
+
+        document.getElementById('profile-content').innerHTML = `
+          <section class="profile-header" style="background: linear-gradient(135deg, ${color}, ${color}dd); padding: 40px 0; margin-bottom: 32px; border-radius: 0;">
+            <div class="container">
+              <button style="display:inline-flex; align-items:center; gap:7px; color:rgba(255,255,255,0.80); background:rgba(255,255,255,0.14); border:none; padding:9px 18px; border-radius:11px; cursor:pointer; font-family:inherit; font-size:13px; font-weight:600; margin-bottom:20px; white-space:nowrap;" onclick="app.navigate('find-tutors')">← Back to Tutors</button>
+              <div style="display:flex; align-items:flex-start; gap:20px;">
+                <div class="tutor-card-avatar" style="background: ${color}; width: 80px; height: 80px; font-size: 32px;">${initials}</div>
+                <div style="flex:1;">
+                  <h1 style="color:white; font-weight:900; font-size:32px; margin-bottom:4px;">${tutor.name}</h1>
+                  <p style="color:rgba(255,255,255,0.80); font-size:16px; margin-bottom:12px;">${tutor.school} · ${tutor.program} · Year ${tutor.year}</p>
+                  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    ${tutor.subjects.map(s => `<div class="tutor-card-subject" style="background:rgba(255,255,255,0.2); color:rgba(255,255,255,0.9); border:1px solid rgba(255,255,255,0.3);">${s}</div>`).join('')}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="container" style="margin-bottom:60px;">
+            <div class="profile-content">
+              <div class="profile-main">
+                <div class="profile-section">
+                  <h2>About</h2>
+                  <p style="color: oklch(0.44 0.05 278); line-height: 1.8;">${tutor.bio}</p>
+                </div>
+                <div class="profile-section">
+                  <h2>Experience</h2>
+                  <p style="color: oklch(0.44 0.05 278); line-height: 1.8;">${tutor.experience}</p>
+                </div>
+                <div class="profile-section">
+                  <h2>Availability</h2>
+                  <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px;">
+                    ${['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => `
+                      <div style="padding:12px; border-radius:10px; text-align:center; font-weight:600; font-size:14px; ${tutor.availability.includes(day) ? `background:${color}20; color:${color};` : 'background:oklch(0.95 0.02 278); color:oklch(0.60 0.05 278);'}">${day}</div>
+                    `).join('')}
+                  </div>
+                </div>
+              </div>
+              <div class="profile-sidebar">
+                <div class="profile-pricing">
+                  <h3 style="font-weight:800; font-size:18px; margin-bottom:16px; color:var(--purple);">Pricing</h3>
+                  <div class="pricing-item">
+                    <div class="pricing-label">Individual Lesson</div>
+                    <div class="pricing-value">${tutor.individual.toLocaleString()} UZS<span style="font-size:14px; color:oklch(0.50 0.05 278);">/hr</span></div>
+                  </div>
+                  <div class="pricing-item">
+                    <div class="pricing-label">Group Lesson</div>
+                    <div class="pricing-value">${tutor.group.toLocaleString()} UZS<span style="font-size:14px; color:oklch(0.50 0.05 278);">/student</span></div>
+                  </div>
+                </div>
+                <div class="profile-section" style="padding:20px;">
+                  <div style="font-size:13px; font-weight:600; color:oklch(0.50 0.05 278); margin-bottom:8px;">Rating</div>
+                  <div style="font-size:28px; font-weight:900; color:var(--purple); margin-bottom:4px;">${tutor.rating} ★</div>
+                  <div style="font-size:13px; color:oklch(0.60 0.05 278);">${tutor.sessions} sessions</div>
+                </div>
+                <div class="contact-buttons">
+                  <a href="https://t.me/${tutor.telegram.replace('@', '')}" target="_blank" class="contact-btn" style="background:var(--purple);">💬 Telegram</a>
+                  <a href="tel:${tutor.phone.replace(/\s/g, '')}" class="contact-btn" style="background:oklch(0.48 0.16 168);">📱 Call</a>
+                  <a href="mailto:${tutor.email}" class="contact-btn" style="background:oklch(0.56 0.20 35);">✉ Email</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      },
+
+      updatePrograms() {
+        const form = document.getElementById('registration-form');
+        const school = form.querySelector('select[name="school"]').value;
+        const programs = PROGRAMS[school] || [];
+        const programSelect = document.getElementById('program-select');
+        programSelect.innerHTML = programs.map(p => `<option>${p}</option>`).join('');
+      },
+
+      submitRegistration(e) {
+        e.preventDefault();
+        const form = document.getElementById('registration-form');
+        const formData = new FormData(form);
+        const availability = Array.from(formData.getAll('availability'));
+
+        const newTutor = {
+          id: TUTORS.length + 1,
+          name: formData.get('fullName'),
+          school: formData.get('school'),
+          program: formData.get('program'),
+          year: parseInt(formData.get('year')),
+          subjects: formData.get('subjects').split(',').map(s => s.trim()),
+          individual: parseInt(formData.get('individual')),
+          group: parseInt(formData.get('group')),
+          bio: formData.get('bio'),
+          experience: formData.get('experience'),
+          telegram: formData.get('telegram'),
+          phone: formData.get('phone'),
+          email: formData.get('email'),
+          availability: availability,
+          sessions: 0,
+          rating: 0
+        };
+
+        this.applications.push({ ...newTutor, status: 'pending' });
+        this.showToast('Application submitted successfully!', 'success');
+        setTimeout(() => this.navigate('register-success'), 500);
+      },
+
+      renderAdmin() {
+        const counts = {
+          all: this.applications.length,
+          pending: this.applications.filter(a => a.status === 'pending').length,
+          approved: this.applications.filter(a => a.status === 'approved').length,
+          rejected: this.applications.filter(a => a.status === 'rejected').length
+        };
+
+        document.getElementById('admin-stats').innerHTML = Object.entries(counts).map(([key, count]) => `
+          <div class="admin-stat">
+            <div class="admin-stat-value">${count}</div>
+            <div class="admin-stat-label">${key.charAt(0).toUpperCase() + key.slice(1)}</div>
+          </div>
+        `).join('');
+
+        this.filterApplications('all');
+      },
+
+      filterApplications(status) {
+        this.adminFilter = status;
+        document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
+        document.querySelector(`[data-status="${status}"]`)?.classList.add('active');
+
+        const filtered = status === 'all' ? this.applications : this.applications.filter(a => a.status === status);
+        document.getElementById('admin-applications').innerHTML = filtered.map((app, idx) => {
+          const color = FACULTY_COLORS[app.school]?.color || 'oklch(0.48 0.26 278)';
+          const initials = app.name.split(' ').map(n => n[0]).join('');
+          return `
+            <div class="admin-card" id="app-${idx}">
+              <div class="admin-card-header">
+                <div class="admin-card-avatar" style="background: ${color};">${initials}</div>
+                <div class="admin-card-info">
+                  <div class="admin-card-name">${app.name}</div>
+                  <div class="admin-card-meta">${app.school} · ${app.program}</div>
+                </div>
+              </div>
+              <div class="admin-card-badge" style="background: ${color}20; color: ${color};">${FACULTY_COLORS[app.school]?.label}</div>
+              <div class="admin-card-bio">${app.bio}</div>
+              ${app.status === 'pending' ? `
+                <div class="admin-card-actions">
+                  <button class="admin-btn admin-btn-approve" onclick="app.approveApplication(${idx})">✓ Approve</button>
+                  <button class="admin-btn admin-btn-reject" onclick="app.rejectApplication(${idx})">✕ Reject</button>
+                </div>
+              ` : `
+                <div style="padding:8px 12px; border-radius:10px; font-size:13px; font-weight:700; text-align:center; ${app.status === 'approved' ? 'background:oklch(0.93 0.07 168); color:oklch(0.40 0.16 168);' : 'background:oklch(0.95 0.08 35); color:oklch(0.52 0.20 35);'}">${app.status === 'approved' ? '✓ Approved' : '✕ Rejected'}</div>
+              `}
+            </div>
+          `;
+        }).join('');
+      },
+
+      approveApplication(idx) {
+        this.applications[idx].status = 'approved';
+        this.showToast('Application approved!', 'success');
+        this.filterApplications(this.adminFilter);
+      },
+
+      rejectApplication(idx) {
+        this.applications[idx].status = 'rejected';
+        this.showToast('Application rejected!', 'error');
+        this.filterApplications(this.adminFilter);
+      },
+
+      showToast(msg, type) {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+    };
+
+    // Initialize
+    app.navigate('home');
+  </script>
+</body>
+</html>
