@@ -2033,8 +2033,8 @@
         e.preventDefault();
         const form = document.getElementById('student-login-form');
         const inputs = form.querySelectorAll('input');
-        const email = inputs[0].value;
-        const password = inputs[1].value;
+        const email = inputs[0].value.trim();
+        const password = inputs[1].value.trim();
 
         if (!email || !password) {
           this.showToast('Please fill in all fields', 'error');
@@ -2084,8 +2084,8 @@
         e.preventDefault();
         const form = document.getElementById('tutor-login-form');
         const inputs = form.querySelectorAll('input');
-        const email = inputs[0].value;
-        const password = inputs[1].value;
+        const email = inputs[0].value.trim();
+        const password = inputs[1].value.trim();
 
         if (!email || !password) {
           this.showToast('Please fill in all fields', 'error');
